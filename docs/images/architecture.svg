@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="720" viewBox="0 0 960 720" font-family="'Segoe UI','Microsoft YaHei','PingFang SC',sans-serif">
+  <!-- 画布底 -->
+  <rect x="0" y="0" width="960" height="720" rx="18" fill="#14181f"/>
+
+  <!-- ===================== Windows 客户端 ===================== -->
+  <rect x="140" y="28" width="680" height="132" rx="14" fill="#1d232e" stroke="#2b3340" stroke-width="1.2"/>
+  <circle cx="170" cy="58" r="5" fill="#3fb950"/>
+  <text x="186" y="63" font-size="17" font-weight="600" fill="#e8eaed">Windows 客户端</text>
+  <text x="300" y="63" font-size="12.5" fill="#9aa4b2">PySide6 桌面应用 · 毛玻璃主题 / 系统托盘 / 离线横幅 / 阈值变色</text>
+
+  <!-- 功能胶囊 -->
+  <g font-size="12.5" fill="#c9d3de">
+    <rect x="166" y="86" width="120" height="30" rx="15" fill="#242b38" stroke="#2b3340"/>
+    <text x="196" y="106" text-anchor="middle">总览 · 多机卡片</text>
+    <rect x="298" y="86" width="120" height="30" rx="15" fill="#242b38" stroke="#2b3340"/>
+    <text x="328" y="106" text-anchor="middle">详情 · 进程表</text>
+    <rect x="430" y="86" width="120" height="30" rx="15" fill="#242b38" stroke="#2b3340"/>
+    <text x="460" y="106" text-anchor="middle">历史 · 趋势图</text>
+    <rect x="562" y="86" width="120" height="30" rx="15" fill="#24365a" stroke="#34507e"/>
+    <text x="592" y="106" text-anchor="middle" fill="#8db8f0">初始化向导</text>
+    <rect x="694" y="86" width="102" height="30" rx="15" fill="#24365a" stroke="#34507e"/>
+    <text x="745" y="106" text-anchor="middle" fill="#8db8f0">服务器管理</text>
+  </g>
+  <text x="166" y="142" font-size="11.5" fill="#9aa4b2">向导经 SSH 自动部署总服务端（asyncssh）；SSH 凭据仅首次部署需要，日常连接走 HTTP Token</text>
+
+  <!-- ===================== 连接箭头 ===================== -->
+  <g stroke="#58a6ff" stroke-width="2" marker-end="url(#arr)">
+    <line x1="480" y1="160" x2="480" y2="222"/>
+  </g>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#58a6ff"/>
+    </marker>
+  </defs>
+  <rect x="500" y="176" width="300" height="34" rx="8" fill="#182030" stroke="#2b3340"/>
+  <text x="650" y="190" text-anchor="middle" font-size="12" fill="#58a6ff" font-weight="600">HTTP + Bearer Token（默认 1s 轮询）</text>
+  <text x="650" y="204" text-anchor="middle" font-size="10.5" fill="#9aa4b2">GET /api/snapshot · /api/servers · /api/servers/{id}/history</text>
+
+  <!-- ===================== 总服务端 daemon ===================== -->
+  <rect x="140" y="224" width="680" height="238" rx="14" fill="#1d232e" stroke="#2b3340" stroke-width="1.2"/>
+  <circle cx="170" cy="254" r="5" fill="#3fb950"/>
+  <text x="186" y="259" font-size="17" font-weight="600" fill="#e8eaed">总服务端 <tspan fill="#9aa4b2" font-weight="400" font-size="13">（任选一台 GPU 服务器承载）</tspan></text>
+  <text x="460" y="259" font-size="12.5" fill="#9aa4b2">gpuviewer_daemon · FastAPI + uvicorn + SQLite/WAL · :7421</text>
+
+  <!-- 内部组件 2×2 -->
+  <g>
+    <rect x="166" y="280" width="308" height="76" rx="10" fill="#242b38" stroke="#2b3340"/>
+    <text x="182" y="304" font-size="13.5" font-weight="600" fill="#8db8f0">Scheduler</text>
+    <text x="182" y="324" font-size="11" fill="#9aa4b2">每 1s 并发轮询全部启用的服务器</text>
+    <text x="182" y="341" font-size="11" fill="#9aa4b2">截止时间制匀速 · 失败指数退避</text>
+
+    <rect x="486" y="280" width="308" height="76" rx="10" fill="#242b38" stroke="#2b3340"/>
+    <text x="502" y="304" font-size="13.5" font-weight="600" fill="#8db8f0">probe 探针</text>
+    <text x="502" y="324" font-size="11" fill="#9aa4b2">自包含采集脚本（纯标准库）</text>
+    <text x="502" y="341" font-size="11" fill="#9aa4b2">local 直采 / ssh 远采双通道</text>
+
+    <rect x="166" y="366" width="308" height="76" rx="10" fill="#242b38" stroke="#2b3340"/>
+    <text x="182" y="390" font-size="13.5" font-weight="600" fill="#8db8f0">Storage</text>
+    <text x="182" y="410" font-size="11" fill="#9aa4b2">快照标量 + 1 分钟聚合桶</text>
+    <text x="182" y="427" font-size="11" fill="#9aa4b2">原始 48h / 聚合 30 天自动清理</text>
+
+    <rect x="486" y="366" width="308" height="76" rx="10" fill="#242b38" stroke="#2b3340"/>
+    <text x="502" y="390" font-size="13.5" font-weight="600" fill="#8db8f0">常驻运行</text>
+    <text x="502" y="410" font-size="11" fill="#9aa4b2">systemd --user（用户级，零 root）</text>
+    <text x="502" y="427" font-size="11" fill="#9aa4b2">无 systemd 环境自动 nohup 兜底</text>
+  </g>
+
+  <!-- ===================== 采集箭头（两条） ===================== -->
+  <g stroke="#3fb950" stroke-width="2" fill="none" marker-end="url(#arrg)">
+    <path d="M 340 462 L 340 524"/>
+    <path d="M 620 462 L 620 524"/>
+  </g>
+  <defs>
+    <marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3fb950"/>
+    </marker>
+  </defs>
+  <text x="352" y="494" font-size="11.5" fill="#3fb950">local 直采（本机）</text>
+  <text x="632" y="494" font-size="11.5" fill="#3fb950">ssh 远采（asyncssh · 密码或密钥）</text>
+
+  <!-- ===================== 底部两台服务器 ===================== -->
+  <rect x="60" y="528" width="380" height="128" rx="14" fill="#1d232e" stroke="#2b3340" stroke-width="1.2"/>
+  <rect x="76" y="546" width="86" height="24" rx="12" fill="#1d3a2a" stroke="#2a5c40"/>
+  <text x="119" y="562" text-anchor="middle" font-size="11.5" fill="#3fb950" font-weight="600">local</text>
+  <text x="76" y="596" font-size="14.5" font-weight="600" fill="#e8eaed">总服务端本机（GPU 服务器）</text>
+  <text x="76" y="618" font-size="11.5" fill="#9aa4b2">守护进程与数据所在；本机直采，延迟最低</text>
+  <text x="76" y="638" font-size="11.5" fill="#9aa4b2">任意多台 · 与远采机完全同权</text>
+
+  <rect x="520" y="528" width="380" height="128" rx="14" fill="#1d232e" stroke="#2b3340" stroke-width="1.2"/>
+  <rect x="536" y="546" width="70" height="24" rx="12" fill="#24365a" stroke="#34507e"/>
+  <text x="571" y="562" text-anchor="middle" font-size="11.5" fill="#8db8f0" font-weight="600">ssh</text>
+  <text x="536" y="596" font-size="14.5" font-weight="600" fill="#e8eaed">其余 GPU 服务器（零安装）</text>
+  <text x="536" y="618" font-size="11.5" fill="#9aa4b2">仅需 SSH 可登录 + python3 与 base64</text>
+  <text x="536" y="638" font-size="11.5" fill="#9aa4b2">客户端「＋ 服务器」随时增删，即时生效</text>
+
+  <text x="480" y="692" text-anchor="middle" font-size="11" fill="#6e7784">GPUViewer · 凭据只存总服务端 config.toml（600 权限）· 全端点 Bearer Token 强制认证</text>
+</svg>

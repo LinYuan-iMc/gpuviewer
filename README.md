@@ -22,24 +22,9 @@
 
 ## 架构
 
-```
-+--------------------------- Windows 客户端 ---------------------------+
-|  PySide6 桌面应用（毛玻璃主题/系统托盘/离线横幅/阈值变色）              |
-|  总览(多机卡片) / 详情(进程表) / 历史(趋势图) / 初始化向导 / 服务器管理 |
-+-----------------------^----------------------------------------------+
-                        | HTTP + Bearer Token（默认 1s 轮询）
-                        | GET /api/snapshot · /api/servers · /history
-+-----------------------+------------ 总服务端（任选一台） --------------+
-| gpuviewer_daemon（FastAPI + uvicorn + SQLite/WAL，:7421）             |
-|   |- Scheduler  每 1s 并发轮询全部启用的服务器（截止时间制匀速）        |
-|   |- probe      自包含采集脚本（纯标准库）：local 直采 / ssh 远采       |
-|   |- Storage    快照标量 + 1 分钟聚合桶；原始 48h / 聚合 30 天自动清理  |
-|   +- systemd --user 常驻（无 systemd 环境 nohup 兜底）                 |
-|         | local 直采                  | ssh（asyncssh，密码或密钥）    |
-|         v                              v                              |
-|   总服务端本机（GPU 服务器）        其余 GPU 服务器（零安装）           |
-+----------------------------------------------------------------------+
-```
+<p align="center">
+  <img src="docs/images/architecture.svg" alt="GPUViewer 架构图" width="720">
+</p>
 
 - 服务端：`gpuviewer_daemon`（FastAPI + SQLite），本机直采 + SSH 远采双通道，被监控机完全同权
 - 客户端：`gpuviewer_client`（PySide6），总览/详情/历史三页，内置 SSH 自动部署引擎
