@@ -6,18 +6,18 @@
   <rect x="140" y="28" width="680" height="132" rx="14" fill="#1d232e" stroke="#2b3340" stroke-width="1.2"/>
   <circle cx="170" cy="58" r="5" fill="#3fb950"/>
   <text x="186" y="63" font-size="17" font-weight="600" fill="#e8eaed">Windows 客户端</text>
-  <text x="300" y="63" font-size="12.5" fill="#9aa4b2">PySide6 桌面应用 · 毛玻璃主题 / 系统托盘 / 离线横幅 / 阈值变色</text>
+  <text x="340" y="63" font-size="12.5" fill="#9aa4b2">PySide6 桌面应用 · 毛玻璃主题 / 系统托盘 / 离线横幅 / 阈值变色</text>
 
   <!-- 功能胶囊 -->
   <g font-size="12.5" fill="#c9d3de">
     <rect x="166" y="86" width="120" height="30" rx="15" fill="#242b38" stroke="#2b3340"/>
-    <text x="196" y="106" text-anchor="middle">总览 · 多机卡片</text>
+    <text x="226" y="106" text-anchor="middle">总览 · 多机卡片</text>
     <rect x="298" y="86" width="120" height="30" rx="15" fill="#242b38" stroke="#2b3340"/>
-    <text x="328" y="106" text-anchor="middle">详情 · 进程表</text>
+    <text x="358" y="106" text-anchor="middle">详情 · 进程表</text>
     <rect x="430" y="86" width="120" height="30" rx="15" fill="#242b38" stroke="#2b3340"/>
-    <text x="460" y="106" text-anchor="middle">历史 · 趋势图</text>
+    <text x="490" y="106" text-anchor="middle">历史 · 趋势图</text>
     <rect x="562" y="86" width="120" height="30" rx="15" fill="#24365a" stroke="#34507e"/>
-    <text x="592" y="106" text-anchor="middle" fill="#8db8f0">初始化向导</text>
+    <text x="622" y="106" text-anchor="middle" fill="#8db8f0">初始化向导</text>
     <rect x="694" y="86" width="102" height="30" rx="15" fill="#24365a" stroke="#34507e"/>
     <text x="745" y="106" text-anchor="middle" fill="#8db8f0">服务器管理</text>
   </g>
@@ -39,7 +39,7 @@
   <!-- ===================== 总服务端 daemon ===================== -->
   <rect x="140" y="224" width="680" height="238" rx="14" fill="#1d232e" stroke="#2b3340" stroke-width="1.2"/>
   <circle cx="170" cy="254" r="5" fill="#3fb950"/>
-  <text x="186" y="259" font-size="17" font-weight="600" fill="#e8eaed">总服务端 <tspan fill="#9aa4b2" font-weight="400" font-size="13">（任选一台 GPU 服务器承载）</tspan></text>
+  <text x="186" y="259" font-size="17" font-weight="600" fill="#e8eaed">总服务端 <tspan fill="#9aa4b2" font-weight="400" font-size="13">（任选一台承载）</tspan></text>
   <text x="460" y="259" font-size="12.5" fill="#9aa4b2">gpuviewer_daemon · FastAPI + uvicorn + SQLite/WAL · :7421</text>
 
   <!-- 内部组件 2×2 -->
