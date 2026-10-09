@@ -1,0 +1,26 @@
+[daemon]
+listen_host = "0.0.0.0"
+listen_port = 7421
+token = "change-me-to-a-long-random-string"
+db_path = "data/gpuviewer.db"
+interval_s = 1.0
+probe_timeout_s = 10.0
+accept_host_keys = true
+top_n = 10  # TOP 进程表条数（每类 CPU/内存前 N）
+
+[[servers]]
+id = "l40"
+name = "L40"
+transport = "local"
+enabled = true
+
+[[servers]]
+id = "rtx4090"
+name = "4090"
+transport = "ssh"
+enabled = true
+host = "192.168.1.11"
+port = 22
+user = "user2"
+auth = "password"
+password = "REPLACE_WITH_REAL_PASSWORD"

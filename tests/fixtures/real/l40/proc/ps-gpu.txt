@@ -1,0 +1,8 @@
+ 134453 u1025    2-05:52:13 VLLM::EngineCore
+ 154080 u1025    2-05:48:39 VLLM::EngineCore
+ 155308 u1025    2-05:48:27 VLLM::EngineCore
+2211043 u1011         16:10:47 /home/24/u1011/.conda/envs/m2doc/bin/python -u tools/train.py m2doc_config/dino-4scale_w_m2doc_r101_doclaynet_hr_query_e4.py --launcher pytorch --work-dir /home/24/u1011/M2-1/mmdetection/work_dirs/doclaynet_hr_query_e4_50epoch_gpu56_bs1 --resume
+2211049 u1011         16:10:47 /home/24/u1011/.conda/envs/m2doc/bin/python -u tools/train.py m2doc_config/dino-4scale_w_m2doc_r101_doclaynet_hr_query_e4.py --launcher pytorch --work-dir /home/24/u1011/M2-1/mmdetection/work_dirs/doclaynet_hr_query_e4_50epoch_gpu56_bs1 --resume
+2211062 u1011         16:10:47 /home/24/u1011/.conda/envs/m2doc/bin/python -u tools/train.py m2doc_config/dino-4scale_w_m2doc_r101_doclaynet_hr_query_e4.py --launcher pytorch --work-dir /home/24/u1011/M2-1/mmdetection/work_dirs/doclaynet_hr_query_e4_50epoch_gpu56_bs1 --resume
+3648240 user1    3-09:25:15 VLLM::Worker_TP0
+3648241 user1    3-09:25:15 VLLM::Worker_TP1

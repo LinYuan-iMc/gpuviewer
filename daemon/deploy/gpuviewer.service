@@ -1,0 +1,17 @@
+# run.sh 由 scripts/deploy_remote.sh 在部署时生成于 ~/gpuviewer/run.sh：
+# 优先 venv/bin/python；服务器缺 ensurepip（venv 建不起来、降级 --user 安装）时
+# 回退系统 python3。本单元通过 run.sh 启动，两条安装路径共用同一入口。
+[Unit]
+Description=GPUViewer monitoring daemon
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/gpuviewer
+Environment=PYTHONPATH=%h/gpuviewer/daemon:%h/gpuviewer/shared
+ExecStart=%h/gpuviewer/run.sh
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

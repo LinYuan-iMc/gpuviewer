@@ -1,0 +1,6 @@
+asyncssh>=2.14
+fastapi>=0.110
+uvicorn>=0.29
+pydantic>=2.6
+# Ubuntu 22.04 出厂 Py3.10 无 tomllib（3.11+ 才进标准库），config.py 回退 import tomli
+tomli>=2.0; python_version < "3.11"

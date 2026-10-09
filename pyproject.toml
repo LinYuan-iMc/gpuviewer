@@ -1,0 +1,87 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gpuviewer"
+version = "2.0.0"
+description = "多服务器 GPU/CPU/内存/网络/磁盘实时监控与历史趋势查看器——Linux 采集守护进程（零 root）+ Windows 桌面客户端（PySide6），客户端内置 SSH 自动部署向导"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "LinYuan-iMc" }]
+keywords = ["gpu", "monitoring", "nvidia-smi", "dashboard", "pySide6", "fastapi"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: X11 Applications :: Qt",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: System :: Monitoring",
+]
+
+[project.optional-dependencies]
+# 客户端：Windows 桌面监控台（含 SSH 自动部署向导所需的 asyncssh）
+client = [
+    # 6.12.0 在 Linux offscreen + Py3.10/3.11 有 bool_dealloc 崩溃（CI 实测），锁 <6.12
+    "PySide6>=6.6,<6.12",
+    "pyqtgraph>=0.13.3",
+    "requests>=2.31",
+    "numpy>=1.26",
+    "asyncssh>=2.14",
+]
+# 守护进程：Linux 服务器端采集 + HTTP API（面向无 root 用户环境）
+daemon = [
+    "fastapi>=0.110",
+    "uvicorn>=0.29",
+    "pydantic>=2.6",
+    "asyncssh>=2.14",
+    "tomli>=2.0; python_version < '3.11'",
+]
+all = ["gpuviewer[client]", "gpuviewer[daemon]"]
+# CI / 开发测试工具链
+test = [
+    "pytest>=8",
+    "pytest-qt>=4.4",
+    "pytest-asyncio>=0.23",
+    "httpx>=0.27",          # fastapi/starlette TestClient 的隐式依赖
+    "ruff>=0.6",
+]
+
+[project.scripts]
+gpuviewer-daemon = "gpuviewer_daemon.__main__:main"
+
+# gui-scripts：Windows 上生成无控制台（pythonw）启动器
+[project.gui-scripts]
+gpuviewer = "gpuviewer_client.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/LinYuan-iMc/gpuviewer"
+Issues = "https://github.com/LinYuan-iMc/gpuviewer/issues"
+
+# 仓库布局：daemon/ client/ shared/ 三个目录各自承载一个顶层包
+[tool.setuptools.packages.find]
+where = ["daemon", "client", "shared"]
+include = ["gpuviewer_daemon*", "gpuviewer_client*", "gpuviewer_shared*"]
+
+[tool.setuptools.package-data]
+# 部署载荷静态文件（deploy_remote.sh / systemd 单元 / 依赖清单）必须随包分发
+"gpuviewer_client.deploy" = ["files/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+qt_api = "pyside6"
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]

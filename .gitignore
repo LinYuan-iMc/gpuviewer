@@ -1,0 +1,41 @@
+# 真实凭据配置（密码/Token）——绝不入库
+config.toml
+daemon/config.toml
+client/config.toml
+daemon/deploy/deploy.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg
+
+# 数据与日志
+*.db
+*.db-wal
+*.db-shm
+logs/
+*.log
+
+# 打包产物
+build/
+dist/
+*.spec
+!scripts/release.spec
+
+# IDE / 系统
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store
+.superpowers/
+
+# 本地工作区（数据库备份/会话产物）
+.backup/
+.zcode/
+.zcodeignore

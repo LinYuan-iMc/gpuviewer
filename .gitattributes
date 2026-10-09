@@ -1,0 +1,7 @@
+# 行尾规范化：仓库内一律 LF 入库；.sh/.service 在工作区也保持 LF
+# （部署走 tar/rsync 打包工作区文件，CRLF 的 bash 脚本到 Linux 直接跑挂）；
+# Windows 批处理按惯例 CRLF。
+*.sh text eol=lf
+*.service text eol=lf
+*.bat text eol=crlf
+*.py text eol=lf
