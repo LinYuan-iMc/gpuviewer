@@ -7,7 +7,7 @@
 import ctypes
 import sys
 
-from PySide6.QtCore import QEvent, QPoint, Qt
+from PySide6.QtCore import QPoint, Qt
 from PySide6.QtGui import QAction, QIcon
 from PySide6.QtWidgets import (
     QApplication,
