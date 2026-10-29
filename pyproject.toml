@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gpuviewer"
-version = "2.0.0"
+version = "2.0.1"
 description = "多服务器 GPU/CPU/内存/网络/磁盘实时监控与历史趋势查看器——Linux 采集守护进程（零 root）+ Windows 桌面客户端（PySide6），客户端内置 SSH 自动部署向导"
 readme = "README.md"
 requires-python = ">=3.10"
