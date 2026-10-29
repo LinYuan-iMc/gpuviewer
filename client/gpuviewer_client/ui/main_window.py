@@ -218,6 +218,12 @@ class MainWindow(QMainWindow):
 
     def showEvent(self, e):
         super().showEvent(e)
+        # restoreGeometry 在 __init__（show 前）应用几何时 isMinimized()
+        # 尚未物化——最小化僵尸态要等首次 show 后才能识别并归位。
+        if not getattr(self, "_state_checked", False):
+            self._state_checked = True
+            if self.isMinimized():
+                self.showNormal()
         if sys.platform == "win32" and not getattr(self, "_glass_on", False):
             hwnd = int(self.winId())
             self._glass_on = glass.enable_acrylic(hwnd)
@@ -269,8 +275,15 @@ class MainWindow(QMainWindow):
                 pass
         if state:
             self.showMaximized()
+        # 历史坑：若保存时窗口处于最小化态，restoreGeometry 会把窗口还原成
+        # "原生可见但 Qt 认为最小化"的僵尸态——内容不绘制、点击不投递，
+        # 用户视角即"最小化键不生效"。恢复后强制归位正常态。
+        if self.isMinimized():
+            self.showNormal()
 
     def _save_geometry(self):
+        if self.isMinimized():      # 最小化时保存会把 minimized 标志写进几何
+            return
         self.settings.qs.setValue("window_geometry", self.saveGeometry().toHex().data().decode())
         self.settings.qs.setValue("window_maximized", self.isMaximized())
         self.settings.qs.sync()
@@ -446,6 +459,6 @@ class MainWindow(QMainWindow):
 
     def changeEvent(self, event):
         super().changeEvent(event)
-        if (event.type() == QEvent.Type.WindowStateChange and self.isMinimized()
-                and self.tray.icon.isSystemTrayAvailable()):
-            self.hide()                        # 最小化隐藏到托盘
+        # 注意：这里曾做过"最小化即隐藏到托盘"（self.hide()）——实测在
+        # 无边框半透明窗上与最小化动画竞争，窗口随即被系统还原，
+        # 用户看到的就是"最小化键不生效"。最小化回归纯任务栏行为。
