@@ -4,6 +4,9 @@ import gpuviewer_shared
 
 
 def test_packages_importable():
-    assert gpuviewer_client.__version__ == "2.0.0"
-    assert gpuviewer_daemon.__version__ == "2.0.0"
-    assert gpuviewer_shared.__version__ == "2.0.0"
+    # 三包同版（与 pyproject 的钉死由 test_version_sync 负责）
+    versions = {gpuviewer_client.__version__,
+                gpuviewer_daemon.__version__,
+                gpuviewer_shared.__version__}
+    assert len(versions) == 1
+    assert versions != {""}
