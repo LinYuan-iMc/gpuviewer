@@ -12,6 +12,17 @@ from gpuviewer_client.ui.main_window import MainWindow
 
 LOG_PATH = Path.home() / ".gpuviewer" / "client.log"
 
+if sys.platform == "win32":
+    # 显式 AppUserModelID：让任务栏把窗口归到 GPUViewer 名下而非
+    # pythonw.exe——否则固定到任务栏的是"裸 Python"（无启动参数，
+    # 点击起不来），图标也是通用 Python 图标。
+    try:
+        import ctypes
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(
+            "LinYuan-iMc.GPUViewer")
+    except Exception:
+        pass
+
 
 def setup_logging() -> None:
     LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
